@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default () => {
+export default ({ title }) => {
   return (
     <View>
-      <Text>Header</Text>
+      <Text>{ title }</Text>
     </View>
   )
 }
