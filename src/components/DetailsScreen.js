@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 export default () => {
   return (
     <View>
-      <Text>Header</Text>
+      <Text>Details</Text>
     </View>
   )
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import Header from './src/components/Header';
+import HomeScreen  from './src/components/HomeScreen';
+import DetailsScreen from './src/components/DetailsScreen';
 
 // This is a pretty ugly "fix".
 // Seems like by the time I'm writing this, react navigation guys are having some kind of problems.
@@ -9,18 +10,21 @@ import Header from './src/components/Header';
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
-class HomeScreen extends Component {
-  render () {
-    return (
-      <View>
-        <Text>Home screen</Text>
-      </View>
-    )
-  }
+const routerOptions = {
+  initialRouteName: 'Home'
 }
 
-export default createStackNavigator({
+const RootStack = createStackNavigator({
   Home: {
     screen: HomeScreen
+  },
+  Details: {
+    screen: DetailsScreen
   }
-});
+}, routerOptions);
+
+export default class App extends Component {
+  render () {
+    return <RootStack />
+  }
+}
