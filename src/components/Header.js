@@ -6,18 +6,30 @@ const StyledText = glamorous.text({
   fontSize: 20
 });
 
+const StyledView = glamorous.view({
+  backgroundColor: '#f1f1f1',
+  height: 70,
+  alignItems: 'center',
+  justifyContent: 'center',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.2,
+  elevation: 2,
+  position: 'relative'
+});
+
 export default class App extends Component {
   constructor(){
     super();
   }
 
   render() {
-    const { title } = this.props;
+    const { headerText } = this.props;
 
     return (
-      <View>
-        <StyledText>{ title }</StyledText>
-      </View>
+      <StyledView>
+        <StyledText>{ headerText }</StyledText>
+      </StyledView>
     )
   }
 }
