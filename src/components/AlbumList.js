@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
-import Album from './Album';
+import { View, Text, Image } from 'react-native';
+import AlbumDetail from './AlbumDetail';
+import glamourous from 'glamorous-native';
+
+const ScrollView = glamourous.scrollView({
+  marginBottom: 50
+});
 
 export default class AlbumList extends Component {
-  render () {
+  renderAlbums () {
     const { albums } = this.props;
+
+    return albums.map((album) => {
+      return (
+        <AlbumDetail album={album} key={album.id} />
+      );
+    });
+  }
+
+  render () {
     return (
-      <View>
-        <FlatList
-        data={albums}
-        renderItem={
-          ({ item }) =>
-            <Album
-              album={item} />
-        }
-        keyExtractor={(item) => item.id} />
-      </View>
+      <ScrollView style={{ marginBottom: 50 }}>
+        {this.renderAlbums()}
+      </ScrollView>
     )
   }
 }
