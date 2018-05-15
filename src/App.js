@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import Header from './src/components/Header';
-import AlbumList from './src/components/AlbumList';
-import albums from './src/data/music_albums.json';
+import Header from './components/Header';
+import AlbumList from './components/AlbumList';
+import albums from './data/music_albums.json';
 
 export default class App extends Component {
   render () {
