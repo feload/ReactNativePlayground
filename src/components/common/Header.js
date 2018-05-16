@@ -18,7 +18,7 @@ const StyledView = glamorous.view({
   position: 'relative'
 });
 
-export default class App extends Component {
+class Header extends Component {
   constructor(){
     super();
   }
@@ -33,3 +33,5 @@ export default class App extends Component {
     )
   }
 }
+
+export { Header };

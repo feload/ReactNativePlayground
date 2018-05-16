@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, Text } from 'react-native';
 import FullWidthImage from 'react-native-fullwidth-image'
 import glamorous from 'glamorous-native';
-import Card from './Card';
-import CardSection from './CardSection';
+import { Card, CardSection } from './common/index';
 
 const FlexView = glamorous.view({
   flex: 1,
@@ -27,7 +26,7 @@ const CoverImage = glamorous.image({
   height: 100
 });
 
-export default class AlbumDetail extends Component {
+class AlbumDetail extends Component {
   render() {
     const { id, title, artist, thumbnail_image, image } = this.props.album;
     return (
@@ -51,3 +50,5 @@ export default class AlbumDetail extends Component {
     );
   }
 }
+
+export default AlbumDetail;

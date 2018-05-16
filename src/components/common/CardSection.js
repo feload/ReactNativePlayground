@@ -8,7 +8,7 @@ const CardSectionView = glamorous.view({
   borderWidth: 1
 });
 
-export default class CardSection extends Component {
+class CardSection extends Component {
   render () {
     const { children } = this.props;
     return (
@@ -18,3 +18,5 @@ export default class CardSection extends Component {
     );
   }
 }
+
+export { CardSection }

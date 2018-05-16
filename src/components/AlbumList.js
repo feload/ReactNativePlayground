@@ -7,7 +7,7 @@ const ScrollView = glamourous.scrollView({
   marginBottom: 50
 });
 
-export default class AlbumList extends Component {
+class AlbumList extends Component {
   renderAlbums () {
     const { albums } = this.props;
 
@@ -26,3 +26,5 @@ export default class AlbumList extends Component {
     )
   }
 }
+
+export default AlbumList;
