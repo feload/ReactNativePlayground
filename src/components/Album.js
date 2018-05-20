@@ -31,12 +31,11 @@ const CoverImage = glamorous.image({
 });
 
 class Album extends Component {
-  componentWillMount () {
-    console.log(this.props);
-  }
+  componentWillMount () {}
 
   render() {
     const { id, title, artist, thumbnail_image, image } = this.props.album;
+
     return (
       <Card key={id}>
         <CardSection>
@@ -55,7 +54,7 @@ class Album extends Component {
           <FullWidthImage source={{ uri: image }} />
         </View>
         <Button title="See detail" onPress={() => {
-          this.props.selectAlbum(1);
+          this.props.selectAlbum(id);
         }} />
       </Card>
     );

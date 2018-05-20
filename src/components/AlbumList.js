@@ -5,6 +5,7 @@ import { Header } from './common'
 import glamourous from 'glamorous-native';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import * as actions from '../actions/albumsActions';
 
 const ScrollView = glamourous.scrollView({
   marginBottom: 190
@@ -12,10 +13,13 @@ const ScrollView = glamourous.scrollView({
 
 
 class AlbumList extends Component {
-  renderAlbums () {
-    const { data } = this.props;
+  componentWillMount () {
+    this.props.loadAlbums();
+  }
 
-    return data.map((album) => {
+  renderAlbums () {
+    const { albums } = this.props;
+    return albums.map((album) => {
       return (
         <Album album={album} key={album.id} />
       );
@@ -26,15 +30,15 @@ class AlbumList extends Component {
     firebase.auth().signOut();
   }
 
-  render () {
-    const { id } = this.props.albums;
+  render() {
+    const { selectedAlbum } = this.props;
     return (
       <View>
-        <Text>Albums value: { id }</Text>
+        <Text>{(selectedAlbum) ? selectedAlbum.title : ''}</Text>
         <Header headerText="Albums" />
         <Button title="Log out" onPress={this.logout} />
         <ScrollView>
-          {this.renderAlbums()}
+          { this.renderAlbums() }
         </ScrollView>
       </View>
     )
@@ -43,8 +47,9 @@ class AlbumList extends Component {
 
 const mapStateProps = (state) => {
   return {
-    albums: state.albums
+    albums: state.albumsList.albums,
+    selectedAlbum: state.albumsList.selectedAlbum
   }
 }
 
-export default connect(mapStateProps)(AlbumList);
+export default connect(mapStateProps, actions)(AlbumList);

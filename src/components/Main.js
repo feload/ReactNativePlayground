@@ -30,7 +30,7 @@ export default class Main extends Component {
         return <LoginForm />;
         break;
       default:
-        return (<AlbumList data={albums} />);
+        return (<AlbumList />);
         break;
     }
   }
