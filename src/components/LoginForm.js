@@ -7,13 +7,19 @@ import {
 } from 'react-native';
 import { Card, CardSection, Header, Spinner } from './common';
 import firebase from 'firebase';
+import { connect } from 'react-redux';
+import * as actions from '../actions/sessionActions';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonPress = this.onButtonPress.bind(this);
-    this.state = { email: null, password: null, error: null, loading: false }
+    this.state = { email: null, password: null }
+  }
+
+  componentWillMount() {
+    this.props.loginLoading(false);
   }
 
   onInputChange(field, value) {
@@ -21,16 +27,9 @@ export default class LoginForm extends Component {
   }
 
   onButtonPress () {
-    this.setState({ error: null, loading: true });
-
+    this.setState({ error: null });
     const { email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .catch(() => {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-      .catch(() => {
-        this.setState({ error: 'Authentication failed.' });
-      });
-    });
+    if(email && email.length && password && password.length) this.props.logIn({ email, password });
   }
 
   render () {
@@ -38,7 +37,7 @@ export default class LoginForm extends Component {
       <View>
         <Header headerText="Login" />
         <Card>
-          <Text>{this.state.error}</Text>
+          <Text>{this.props.error}</Text>
           <TextInput
             placeholder="Email"
             onChangeText = {
@@ -51,7 +50,7 @@ export default class LoginForm extends Component {
             (value) => this.onInputChange('password', value)
           }/>
           {
-            (this.state.loading) ?
+            (this.props.loading) ?
               <Spinner /> :
               <Button title="Login" onPress={this.onButtonPress} />
             }
@@ -60,3 +59,14 @@ export default class LoginForm extends Component {
     )
   }
 }
+
+const mapPropsState = (state) => {
+  console.log(state.session);
+
+  return {
+    error: state.session.error,
+    loading: state.session.loading
+  }
+}
+
+export default connect(mapPropsState, actions)(LoginForm);

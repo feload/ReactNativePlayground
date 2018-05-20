@@ -5,12 +5,11 @@ import { Header } from './common'
 import glamourous from 'glamorous-native';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import * as actions from '../actions/albumsActions';
+import * as albumsActions from '../actions/albumsActions';
 
 const ScrollView = glamourous.scrollView({
-  marginBottom: 190
+  marginBottom: 220
 });
-
 
 class AlbumList extends Component {
   componentWillMount () {
@@ -52,4 +51,4 @@ const mapStateProps = (state) => {
   }
 }
 
-export default connect(mapStateProps, actions)(AlbumList);
+export default connect(mapStateProps, albumsActions)(AlbumList);
