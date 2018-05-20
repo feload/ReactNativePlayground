@@ -5,7 +5,7 @@ import {
   Button,
   TextInput
 } from 'react-native';
-import { Card, CardSection, Spinner } from './common';
+import { Card, CardSection, Header, Spinner } from './common';
 import firebase from 'firebase';
 
 export default class LoginForm extends Component {
@@ -35,25 +35,28 @@ export default class LoginForm extends Component {
 
   render () {
     return (
-      <Card>
-        <Text>{this.state.error}</Text>
-        <TextInput
-          placeholder="Email"
+      <View>
+        <Header headerText="Login" />
+        <Card>
+          <Text>{this.state.error}</Text>
+          <TextInput
+            placeholder="Email"
+            onChangeText = {
+            (value) => this.onInputChange('email', value)
+          }/>
+          <TextInput
+          placeholder = "Password"
+          secureTextEntry
           onChangeText = {
-          (value) => this.onInputChange('email', value)
-        }/>
-        <TextInput
-        placeholder = "Password"
-        secureTextEntry
-        onChangeText = {
-          (value) => this.onInputChange('password', value)
-        }/>
-        {
-          (this.state.loading) ?
-            <Spinner /> :
-            <Button title="Login" onPress={this.onButtonPress} />
-          }
-      </Card>
+            (value) => this.onInputChange('password', value)
+          }/>
+          {
+            (this.state.loading) ?
+              <Spinner /> :
+              <Button title="Login" onPress={this.onButtonPress} />
+            }
+        </Card>
+      </View>
     )
   }
 }

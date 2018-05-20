@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 import AlbumDetail from './AlbumDetail';
+import { Header } from './common'
 import glamourous from 'glamorous-native';
+import firebase from 'firebase';
 
 const ScrollView = glamourous.scrollView({
-  marginBottom: 50
+  marginBottom: 190
 });
+
 
 class AlbumList extends Component {
   renderAlbums () {
@@ -18,11 +21,19 @@ class AlbumList extends Component {
     });
   }
 
+  logout() {
+    firebase.auth().signOut();
+  }
+
   render () {
     return (
-      <ScrollView style={{ marginBottom: 50 }}>
-        {this.renderAlbums()}
-      </ScrollView>
+      <View>
+        <Header headerText="Albums" />
+        <Button title="Log out" onPress={this.logout} />
+        <ScrollView>
+          {this.renderAlbums()}
+        </ScrollView>
+      </View>
     )
   }
 }
