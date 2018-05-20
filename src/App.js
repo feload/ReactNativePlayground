@@ -1,44 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
-import { Header, Spinner } from './components/common';
+import { View, Text } from 'react-native';
 
-import LoginForm from './components/LoginForm';
-import AlbumList from './components/AlbumList';
-import albums from './data/music_albums.json';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-import firebase from 'firebase';
-import firebaseConf from './config/firebase';
+import Main from './components/Main';
+import rootReducer from './reducers';
 
-export default class App extends Component {
-  state = { loggedIn: null }
+const store = createStore(rootReducer);
 
-  componentWillMount () {
-    firebase.initializeApp(firebaseConf);
-
-    firebase.auth().onAuthStateChanged((user) => {
-      this.setState({ loggedIn: !!user });
-    });
-  }
-
-  renderContent () {
-    switch (this.state.loggedIn) {
-      case null:
-        return <Spinner />
-      break;
-      case false:
-        return <LoginForm />;
-      break;
-      default:
-        return (<AlbumList albums={albums} />);
-      break;
-    }
-  }
-
-  render () {
-    return (
-      <View>
-        { this.renderContent() }
-      </View>
-    )
-  }
+export default () => {
+  return (
+    <Provider store={store}>
+      <Main />
+    </Provider>
+  )
 }
