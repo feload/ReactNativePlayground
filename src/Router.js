@@ -23,11 +23,12 @@ class RouterComponent extends Component {
           <Scene key="login"
             component={LoginForm}
             title="Please login"
+            initial
              />
 
           <Scene key="albumList"
             component={AlbumList}
-            title="Albums list" initial />
+            title="Albums list" />
 
           <Scene key="albumDetails"
             component={AlbumDetails}
