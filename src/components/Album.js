@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import * as albumsActions from '../actions/albumsActions';
+
+import { View, Image, Text, Button } from 'react-native';
+import { Card, CardSection } from './common/index';
 import FullWidthImage from 'react-native-fullwidth-image'
 import glamorous from 'glamorous-native';
-import { Card, CardSection } from './common/index';
 
 const FlexView = glamorous.view({
   flex: 1,
@@ -26,7 +30,11 @@ const CoverImage = glamorous.image({
   height: 100
 });
 
-class AlbumDetail extends Component {
+class Album extends Component {
+  componentWillMount () {
+    console.log(this.props);
+  }
+
   render() {
     const { id, title, artist, thumbnail_image, image } = this.props.album;
     return (
@@ -46,9 +54,12 @@ class AlbumDetail extends Component {
         <View>
           <FullWidthImage source={{ uri: image }} />
         </View>
+        <Button title="See detail" onPress={() => {
+          this.props.selectAlbum(1);
+        }} />
       </Card>
     );
   }
 }
 
-export default AlbumDetail;
+export default connect(null, albumsActions)(Album);

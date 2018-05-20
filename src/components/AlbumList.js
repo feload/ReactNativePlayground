@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, Button } from 'react-native';
-import AlbumDetail from './AlbumDetail';
+import Album from './Album';
 import { Header } from './common'
 import glamourous from 'glamorous-native';
 import firebase from 'firebase';
+import { connect } from 'react-redux';
 
 const ScrollView = glamourous.scrollView({
   marginBottom: 190
@@ -12,11 +13,11 @@ const ScrollView = glamourous.scrollView({
 
 class AlbumList extends Component {
   renderAlbums () {
-    const { albums } = this.props;
+    const { data } = this.props;
 
-    return albums.map((album) => {
+    return data.map((album) => {
       return (
-        <AlbumDetail album={album} key={album.id} />
+        <Album album={album} key={album.id} />
       );
     });
   }
@@ -26,8 +27,10 @@ class AlbumList extends Component {
   }
 
   render () {
+    const { id } = this.props.albums;
     return (
       <View>
+        <Text>Albums value: { id }</Text>
         <Header headerText="Albums" />
         <Button title="Log out" onPress={this.logout} />
         <ScrollView>
@@ -38,4 +41,10 @@ class AlbumList extends Component {
   }
 }
 
-export default AlbumList;
+const mapStateProps = (state) => {
+  return {
+    albums: state.albums
+  }
+}
+
+export default connect(mapStateProps)(AlbumList);
