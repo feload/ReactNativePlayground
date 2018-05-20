@@ -5,7 +5,7 @@ import {
   Button,
   TextInput
 } from 'react-native';
-import { Card, CardSection, Header, Spinner } from './common';
+import { Card, CardSection, Spinner } from './common';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import * as actions from '../actions/sessionActions';
@@ -35,7 +35,6 @@ class LoginForm extends Component {
   render () {
     return (
       <View>
-        <Header headerText="Login" />
         <Card>
           <Text>{this.props.error}</Text>
           <TextInput
@@ -61,8 +60,6 @@ class LoginForm extends Component {
 }
 
 const mapPropsState = (state) => {
-  console.log(state.session);
-
   return {
     error: state.session.error,
     loading: state.session.loading

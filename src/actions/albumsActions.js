@@ -1,5 +1,6 @@
 import { SELECT_ALBUM, ALBUMS_LOADED } from '../types';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 
 export const loadAlbums = () => {
   return (dispatch) => {
@@ -19,8 +20,13 @@ export const albumsLoaded = (albums) => {
 };
 
 export const selectAlbum = (id) => {
-  return {
-    type: SELECT_ALBUM,
-    payload: id
+  return (dispatch, getState) => {
+    const albums = getState().albumsList.albums;
+    const filteredAlbums = albums.filter((album) => {
+      return (album.id == id);
+    })
+    const album = filteredAlbums[0];
+    const { title } = album;
+    Actions.albumDetails({ title, album });
   }
 }
